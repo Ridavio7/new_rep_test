@@ -2,7 +2,7 @@ name: Run tests on any Push event
 
 on:
   push:
-    branches: ['**']
+    branches: ["**"]
 
 jobs:
   run_tests:
@@ -13,7 +13,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: "3.8"
 
       - name: Install dependencies
         run: |
@@ -23,8 +23,11 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          export PYTHONPATH=src
-          coverage run -m unittest src.tests
+          cd src
+          export PYTHONPATH=.
+          coverage run -m unittest tests
 
       - name: Show coverage report
-        run: coverage report
+        run: |
+          cd src
+          coverage report
